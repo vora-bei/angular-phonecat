@@ -52,7 +52,7 @@ angular.module('phonecat', ['phonecatFilters', 'phonecatServices']).
 }).
     filter('inMassiv', function() {
         return function(input, massiv) {
-            var out = "";
+            var out = " ";
             for (var i = 0; i < input.length; i++) {
                 out = input.charAt(i) + out;
             }
