@@ -22,12 +22,12 @@ angular.module('phonecat', ['phonecatFilters', 'phonecatServices']).
                         data[$(this).attr('name')] = true;
                     })
                 }
-                target = $(event.target);
+                target = $(event.target).filter('[type="button"]');
                 if (target.hasClass('active')) {
                     isRadio ? data[target.attr('name')]=true : (delete data[target.attr('name')])
                 }
                 else {
-                    data[target.attr('name')] = true;
+                    target.length && (data[target.attr('name')] = true)
                 }
                 scope.$apply(function () {
                     ctrl.$setViewValue(data)
@@ -50,16 +50,15 @@ angular.module('phonecat', ['phonecatFilters', 'phonecatServices']).
         }
     };
 }).
-    filter('inMassiv', function() {
-        return function(input, massiv) {
-            var out = " ";
-            for (var i = 0; i < input.length; i++) {
-                out = input.charAt(i) + out;
+    filter('inCategory', function() {
+        return function(list, massiv) {
+            var filterList=[];
+            for (var i = 0; i < list.length; i++) {
+                if(massiv[list[i]['category']])
+                    filterList.push(list[i])
             }
-// conditional based on optional argument
-            if (uppercase) {
-                out = out.toUpperCase();
-            }
-            return out;
+            if(angular.equals({},massiv))
+                return list
+            return filterList;
         }
     });

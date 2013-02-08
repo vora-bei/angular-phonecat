@@ -14,13 +14,12 @@
     <div class="span10">
       <!--Body content-->
         <div class="btn-group" ng-model="content"  data-toggle="buttons-checkbox">
-            <button type="button" name='left' class="btn btn-primary">Left</button>
-            <button type="button" name='middle' class="btn btn-primary">Middle</button>
-            <button type="button" name='right' class="btn btn-primary">Right</button>
+            <button type="button" name='smartfone' class="btn btn-primary">Смартфоны</button>
+            <button type="button" name='planshet' class="btn btn-primary">Планшеты</button>
         </div>
-        {{content | json}}
+        <br>
       <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp | :content" class="thumbnail">
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp | inCategory:content" class="thumbnail">
           <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
           <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
           <p>{{phone.snippet}}</p>
